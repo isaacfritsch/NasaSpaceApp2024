@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/themes/default/style.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"></script>      
+        <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.6.1"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.2/css/bulma.min.css"></script>        
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-k6yGuvFZPpQHgO6giOq2Yy1DEAzP8gFNl/QIWmtmJ/Yaf16O8B7GnAyj6uQuMz9y" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-p2DaJXz7NsKT8DIAHgTlyjKQFJ7Chpq2T3GIzZ+I+PK60vfpYV6PNiUAGM2vDCGi" crossorigin=""></script>
+
+        <title>Nasaspaceapp</title> 
+
+        <!-- Estilo CSS para o plano de fundo -->
+        <style>
+            body {
+                background-image: url('{% static "imagens/background_image.svg" %}');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 100vh;
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+        </style>  
+    </head>
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>

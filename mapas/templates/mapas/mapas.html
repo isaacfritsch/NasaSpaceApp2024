@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        body {
+            background-image: url('{% static "imagens/background_image1.svg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+    
+    <div style="width: 800px; height: 600px; overflow: hidden; position: relative; margin: auto;">
+        <iframe
+            src="https://www.ibge.gov.br/apps/atlas_nacional/#/mapa/?share=WyJvc20iLDQsWy02MjQ0ODgwLjI2NzUwMDU5MywtMTQ3NDg0My41OTM4MjEzNDkzXSxbWyJleHQiLCJodHRwczovL2dlb3NlcnZpY29zLmluZGUuZ292LmJyL2dlb3NlcnZlci9FUEUvb3dzIiwiYmFjc2VkaW1lbiIsIkJhY2lhcyBTZWRpbWVudGFyZXMiLHRydWUsMSwwLDBdXV0="
+            frameborder="0"
+            style="width: 1200px; height: 1000px; position: absolute; top: -160px; left: -150px;"
+        ></iframe>
+    </div>
+{% endblock content %}
