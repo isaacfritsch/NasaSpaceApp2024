@@ -12,21 +12,36 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.2/css/bulma.min.css"></script>        
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-k6yGuvFZPpQHgO6giOq2Yy1DEAzP8gFNl/QIWmtmJ/Yaf16O8B7GnAyj6uQuMz9y" crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-p2DaJXz7NsKT8DIAHgTlyjKQFJ7Chpq2T3GIzZ+I+PK60vfpYV6PNiUAGM2vDCGi" crossorigin=""></script>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
 
+        
         <title>Nasaspaceapp</title> 
 
         <!-- Estilo CSS para o plano de fundo -->
         <style>
             body {
-                background-image: url('{% static "imagens/background_image.svg" %}');
+                background-image: url('{% static "imagens/texto.jpg" %}');
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
                 height: 100vh;
-                margin: 0;
-                font-family: Arial, sans-serif;
+                margin: 0;            
             }
-        </style>  
+    
+            h1 {
+                font-family: 'Poppins', sans-serif;
+                color: #DAA520; /* amarelo-terroso */
+                font-size: 3rem;
+            }
+    
+            p {
+                font-size: 1.2rem;
+                color: #000000; /* preto para contraste */
+            }
+        </style>
     </head>
     <body>
         {% block content %}

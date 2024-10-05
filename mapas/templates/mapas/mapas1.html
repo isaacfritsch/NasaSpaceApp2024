@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>This is the new page</h1>
+
+
+
+
+    <a href="{% url 'home' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 200px;">
+        <span class="icon">
+            <i class="fa-solid fa-chevron-left" style="margin-right: 8px;"></i>
+        </span>
+        PREVIOUS 
+    </a>
+    <a href="{% url 'mapas2' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 60px;">
+        NEXT
+        <span class="icon">
+            <i class="fa-solid fa-chevron-right" style="margin-left: 8px;"></i>
+        </span>
+    </a>
+{% endblock %}
+
+
+

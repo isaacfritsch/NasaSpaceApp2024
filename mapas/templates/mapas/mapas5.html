@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="width: 800px; height: 600px; overflow: hidden; position: relative; margin: auto;">
+    <iframe
+        src="https://worldview.earthdata.nasa.gov/?v=-99.2281205725655,-35.180558170338,-4.0508422771247865,7.413771021849483&l=Reference_Labels_15m,Reference_Features_15m,Coastlines_15m,MODIS_Combined_Thermal_Anomalies_All,Land_Water_Map&lg=true&l1=Reference_Labels_15m,Reference_Features_15m,Coastlines_15m,MODIS_Combined_Thermal_Anomalies_All,Land_Water_Map&lg1=true&ca=true&cv=49&t=2002-10-05-T00%3A00%3A00Z&t1=2024-10-05-T17%3A34%3A35Z"
+        frameborder="0"
+        style="width: 1200px; height: 1000px; position: absolute; top: -160px; left: -150px;"
+    ></iframe>
+</div>
+{% endblock %}
