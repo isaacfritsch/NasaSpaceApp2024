@@ -2,7 +2,7 @@
 
 {% block content %}
 <div id='map' style='width: 100%; height: 500px;'></div>
-<script>
+{% comment %} <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiaXNhYWNmcml0c2NoMiIsImEiOiJjbTF3bjh5MXUwcHBhMmpvbnQxYzFyOGJhIn0.ZHG6sujbL8tqshwhteDVLQ';
     var map = new mapboxgl.Map({
         container: 'map', // ID do elemento onde o mapa será renderizado
@@ -10,6 +10,59 @@
         center: [-47.9292, -15.7801], // Centro do mapa (long, lat)
         zoom: 4 // Nível de zoom inicial
     });
+</script> {% endcomment %}
+
+<script>
+    // Inicializa o mapa
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaXNhYWNmcml0c2NoMiIsImEiOiJjbTF3bjh5MXUwcHBhMmpvbnQxYzFyOGJhIn0.ZHG6sujbL8tqshwhteDVLQ';
+    var map = new mapboxgl.Map({
+        container: 'map', // ID do elemento onde o mapa será renderizado
+        style: 'mapbox://styles/mapbox/streets-v11', // Estilo do mapa (pode ser modificado)
+        center: [-47.9292, -15.7801], // Centro do mapa (long, lat)
+        zoom: 4 // Nível de zoom inicial
+    });
+
+    // Busca os dados da API do Xeno-canto
+    const apiUrl = 'https://www.xeno-canto.org/api/2/recordings?query=cnt:Brazil';
+    fetch('/proxy/xeno-canto/')
+    .then(response => response.json())
+    .then(data => {
+        data.recordings.forEach(recording => {
+            // Verifica e corrige a URL do arquivo de som
+            let somUrl = recording.file;
+            if (!somUrl.startsWith('https://')) {
+                somUrl = 'https:' + somUrl; // Adiciona o "https:" se estiver faltando
+            }
+
+            // Tenta carregar o som usando o modo 'no-cors' para verificar a disponibilidade
+            fetch(somUrl, { mode: 'no-cors' })
+                .then(() => {
+                    // Se o som estiver disponível, adiciona o marcador e o player de áudio
+                    const marker = new mapboxgl.Marker()
+                        .setLngLat([recording.lng, recording.lat])
+                        .addTo(map);
+
+                    const popup = new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(`
+                            <h3>${recording.en}</h3>
+                            <p>${recording.gen} ${recording.sp}</p>
+                            <audio controls>
+                                <source src="${somUrl}" type="audio/mpeg">
+                                Seu navegador não suporta o player de áudio.
+                            </audio>
+                        `);
+
+                    marker.setPopup(popup);
+                })
+                .catch(() => {
+                    console.warn(`Som não disponível para a gravação: ${recording.en}`);
+                });
+        });
+    })
+    .catch(error => {
+        console.error('Erro ao buscar dados da API do Xeno-canto:', error);
+    });
+
 </script>
 
 
