@@ -17,21 +17,6 @@ def mapas4(request):
 def mapas5(request): 
     return render(request, 'mapas/mapas5.html')
 
-def mapa_plantas(request): 
-    return render(request, 'mapas/mapa_plantas.html')
-
-def mapa_insetos(request): 
-    return render(request, 'mapas/mapa_insetos.html')
-
-def mapa_repteis(request): 
-    return render(request, 'mapas/mapa_repteis.html')
-
-def mapa_passaros(request): 
-    return render(request, 'mapas/mapa_passaros.html')
-
-def mapa_anfibios(request): 
-    return render(request, 'mapas/mapa_anfibios.html')
-
 def proxy_xeno_canto(request):
     # URL da API do Xeno-canto
     url = 'https://www.xeno-canto.org/api/2/recordings?query=cnt:Brazil'

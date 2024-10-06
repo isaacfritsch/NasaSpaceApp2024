@@ -1,4 +1,106 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<div class="section"> <!-- Usar section para maior flexibilidade -->
+    <!-- Mapa e Botões Alinhados -->
+    <div class="columns" style="height: 420px;">
+      <!-- Mapa (8 colunas com offset de 4 para alinhar à direita) -->
+      <div class="box column is-4"  style="margin-top:200px;">
+        <p style="font-family: 'Lora', serif; font-size: 1.5rem;
+        color: #2e2e2e;">Explore the sounds of Brazil's birds on this interactive map. Click on each point to hear unique bird calls from different ecosystems across the country.</p>
+      </div>
+        <div style="position: absolute; bottom: 60px; left: 120px;">
+        <img src="{% static 'imagens/indigena4final.png' %}" alt="Imagem de exemplo" style="width: 200px; height: auto;">
+    </div>
+      <div class="column is-8">
+        <div id='map' style='width: 100%; height: 550px;'></div> <!-- Mapa com altura ajustada -->        
+    </div>
+</div>   
+</div>
+</div>
+
+<!-- Botões de Navegação -->
+<a href="{% url 'mapas3' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 200px;">
+    <span class="icon">
+        <i class="fa-solid fa-chevron-left" style="margin-right: 8px;"></i>
+    </span>
+    PREVIOUS 
+</a>
+<a href="{% url 'mapas5' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 60px;">
+    NEXT
+    <span class="icon">
+        <i class="fa-solid fa-chevron-right" style="margin-left: 8px;"></i>
+    </span>
+</a>
+
+
+<script>
+    // Inicializa o mapa
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaXNhYWNmcml0c2NoMiIsImEiOiJjbTF3bjh5MXUwcHBhMmpvbnQxYzFyOGJhIn0.ZHG6sujbL8tqshwhteDVLQ';
+    const audioCache = new Map();  // Mapa para armazenar áudios já carregados
+
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-47.9292, -15.7801],
+        zoom: 4
+    });
+    
+    // Busca os dados da API do Xeno-canto via proxy
+    fetch('/proxy/xeno-canto/')
+        .then(response => response.json())
+        .then(data => {
+            data.recordings.forEach(recording => {
+                const marker = new mapboxgl.Marker()
+                    .setLngLat([recording.lng, recording.lat])
+                    .addTo(map);
+    
+                marker.getElement().addEventListener('click', () => {
+                    let somUrl = `/proxy/som/${recording.id}/`;
+    
+                    // Verifica se o áudio já está no cache
+                    if (audioCache.has(recording.id)) {
+                        const cachedUrl = audioCache.get(recording.id);
+                        const popup = new mapboxgl.Popup({ offset: 25 })
+                            .setHTML(`
+                                <h3>${recording.en}</h3>
+                                <p>${recording.gen} ${recording.sp}</p>
+                                <audio controls>
+                                    <source src="${cachedUrl}" type="audio/mpeg">
+                                    Seu navegador não suporta o player de áudio.
+                                </audio>
+                            `);
+                        marker.setPopup(popup).togglePopup();
+                    } else {
+                        // Faz a requisição para o áudio e armazena no cache
+                        fetch(somUrl, { method: 'HEAD' })
+                            .then(soundResponse => {
+                                if (soundResponse.ok) {
+                                    audioCache.set(recording.id, somUrl);  // Armazena no cache
+                                    const popup = new mapboxgl.Popup({ offset: 25 })
+                                        .setHTML(`
+                                            <h3>${recording.en}</h3>
+                                            <p>${recording.gen} ${recording.sp}</p>
+                                            <audio controls>
+                                                <source src="${somUrl}" type="audio/mpeg">
+                                                Seu navegador não suporta o player de áudio.
+                                            </audio>
+                                        `);
+                                    marker.setPopup(popup).togglePopup();
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erro ao verificar o som: ', error);
+                            });
+                    }
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados da API do Xeno-canto:', error);
+        });
+    </script>
+    
 {% endblock %}
+
+
