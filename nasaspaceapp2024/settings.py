@@ -3,6 +3,7 @@ from pathlib import Path
 from decouple import config, Csv
 import dj_database_url
 from urllib.parse import urlparse
+import django_on_heroku
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
