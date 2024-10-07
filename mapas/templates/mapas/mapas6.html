@@ -1,48 +1,37 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
-<style>
-    /* Remove o scrolling da página */
-    body {
-      overflow: hidden;
-    }
-  </style>
-<div class="section">
-    <!-- Mapa e Botões Alinhados -->
-    <div class="columns is-centered" style="height: 420px;">
-      <!-- Texto centralizado dentro do box -->
-      <div class="box column is-6 has-text-centered">
-        <p style="font-family: 'Lora', serif; font-size: 1.5rem; color: #2e2e2e;">
-          <!-- Aqui vai o seu texto -->
-          The land isn’t just where we live, it’s part of who we are. Our connection with the plants, animals, and the Earth is deep. For generations, we’ve used the land wisely, taking only what we need. But now, with the spread of wildfires, large-scale farming, mining, and deforestation, that balance is being destroyed. These actions are harming not just the land, but our entire way of life, without any thought for the future.
-        Sustainability is something we’ve always practiced, making sure there’s enough for the next generations. Our traditions teach us to respect the Earth, and if we want to protect it, we all need to embrace this way of thinking. We must act now to preserve the land, not just for us, but for all those who will come after.
-        </p>
-      </div>
+{% block content %}       
+
+    <div style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: 'Lora', serif;
+        text-align: center;
+    ">
+        <div style="
+            padding: 40px;
+            background-color: transparent;
+        ">
+            <h1 style="
+                font-size: 4rem;
+                color: #2e2e2e;
+                margin-bottom: 30px;
+            ">
+            Thank you very much
+            </h1>
+            <p style="
+                font-size: 2rem;
+                color: #2e2e2e;
+                margin-bottom: 50px;
+            ">
+            I hope this message has inspired some reflection within you.
+            </p>
+            <a href="{% url 'mapas1' %}" class="button is-large is-success" style="color: black; font-size: 1.8rem;">
+                View message again
+            </a>
+            
+        </div>
     </div>
-    <!-- Imagem centralizada abaixo do box -->
-    <div class="columns is-centered">
-      <div class="is-flex is-justify-content-center">
-        <img src="{% static 'imagens/indigena1final.png' %}" alt="Imagem de exemplo" style="width: 200px; height: auto; padding: 10px;">
-      </div>
-    </div>
-</div>
-
-
-
-
-
-    <a href="{% url 'mapas5' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 200px;">
-        <span class="icon">
-            <i class="fa-solid fa-chevron-left" style="margin-right: 8px;"></i>
-        </span>
-        PREVIOUS 
-    </a>
-    <a href="{% url 'mapas7' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 60px;">
-        NEXT
-        <span class="icon">
-            <i class="fa-solid fa-chevron-right" style="margin-left: 8px;"></i>
-        </span>
-    </a> 
-
-  
 {% endblock %}

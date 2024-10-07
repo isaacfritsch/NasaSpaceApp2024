@@ -5,99 +5,22 @@
     <!-- Mapa e Botões Alinhados -->
     <div class="columns" style="height: 420px;">
       <!-- Mapa (8 colunas com offset de 4 para alinhar à direita) -->
-      <div class="box column is-4" style="margin-top:100px;">
+      <div class="box column is-4"  style="margin-top:200px;">
         <p style="font-family: 'Lora', serif; font-size: 1.5rem;
-        color: #2e2e2e;">First, let’s define biodiversity. Biodiversity is the richness and variety of species in the natural world, and in Brazil, it encompasses over 200,000 cataloged species across various biomes and marine environments. On the map, you can learn about some of these species.</div>
+        color: #2e2e2e;">Explore the sounds of Brazil's birds on this interactive map. Click on each point to hear unique bird calls from different ecosystems across the country.</p>
+      </div>
         <div style="position: absolute; bottom: 60px; left: 120px;">
-        <img src="{% static 'imagens/indigena2final.png' %}" alt="Imagem de exemplo" style="width: 200px; height: auto;">
+        <img src="{% static 'imagens/indigena4final.png' %}" alt="Imagem de exemplo" style="width: 200px; height: auto;">
     </div>
       <div class="column is-8">
-        <div id='map' style='width: 100%; height: 550px;'></div> <!-- Mapa com altura ajustada -->
-  
-        <!-- Botões abaixo do mapa, alinhados -->
-        <div x-data="{ one: true, 
-        two: false,
-        three: false, 
-        four: false,
-        five: false,
-        six:false,
-        backgroundcolor: 'background-color: #3298dc;',
-        textcolor: 'color: white;'                                       
-        }">
-        <div class="columns mt-2 is-multiline is-mobile">
-            <div class="column is-narrow">
-              <div class="button is-rounded"
-                x-bind:class="one ? 'is-active' : ''"
-                x-on:click="one = true; two = false; three = false;four= false;five= false;six = false; updateMap(47126);" 
-                x-bind:style="one ? backgroundcolor : ''">
-                  <span class="icon">
-                      <i class="fa-solid fa-feather-pointed" style="margin-right: 20px;"></i>
-                  </span>
-                  <p x-bind:style="one ? textcolor : ''">Plants</p>
-              </div>
-            </div>
-            <div class="column is-narrow">
-              <div class="button is-rounded"
-                x-bind:class="two ? 'is-active' : ''"
-                x-on:click="one = false; two = true; three = false;four= false;five= false;six = false; updateMap(47158);" 
-                x-bind:style="two ? backgroundcolor : ''">
-                  <span class="icon">
-                      <i class="fa-solid fa-mosquito" style="margin-right: 20px;"></i>
-                  </span>
-                  <p x-bind:style="two ? textcolor : ''">Insects</p>
-              </div>
-            </div>
-            <div class="column is-narrow">
-              <div class="button is-rounded"
-                x-bind:class="three ? 'is-active' : ''"
-                x-on:click="one = false; two = false; three = true;four= false;five= false;six = false; updateMap(26036);" 
-                x-bind:style="three ? backgroundcolor : ''">
-                  <span class="icon">
-                      <i class="fa-solid fa-worm" style="margin-right: 20px;"></i>
-                  </span>
-                  <p x-bind:style="three ? textcolor : ''">Reptiles</p>
-              </div>
-            </div>
-            <div class="column is-narrow">
-              <div class="button is-rounded"
-                x-bind:class="four ? 'is-active' : ''"
-                x-on:click="one = false; two = false; three = false;four= true;five= false;six = false; updateMap(3);" 
-                x-bind:style="four ? backgroundcolor : ''">
-                  <span class="icon">
-                      <i class="fa-solid fa-crow" style="margin-right: 20px;"></i>
-                  </span>
-                  <p x-bind:style="four ? textcolor : ''">Birds</p>
-              </div>
-            </div>
-            <div class="column is-narrow">
-              <div class="button is-rounded"
-                x-bind:class="five ? 'is-active' : ''"
-                x-on:click="one = false; two = false; three = false;four= false;five= true;six = false; updateMap(20978);" 
-                x-bind:style="five ? backgroundcolor : ''">
-                  <span class="icon">
-                      <i class="fa-solid fa-frog" style="margin-right: 20px;"></i>
-                  </span>
-                  <p x-bind:style="five ? textcolor : ''">Amphibians</p>
-              </div>
-            </div>
-            <div class="column is-narrow">
-                <div class="button is-rounded"
-                  x-bind:class="six ? 'is-active' : ''"
-                  x-on:click="one = false; two = false; three = false;four= false;five= false;six= true ; updateMap(47178);" 
-                  x-bind:style="six ? backgroundcolor : ''">
-                    <span class="icon">
-                        <i class="fa-solid fa-fish" style="margin-right: 20px;"></i>
-                    </span>
-                    <p x-bind:style="six ? textcolor : ''">Fish</p>
-                </div>
-              </div>
-          </div>
-    </div>    
+        <div id='map' style='width: 100%; height: 550px;'></div> <!-- Mapa com altura ajustada -->        
+    </div>
+</div>   
 </div>
 </div>
 
 <!-- Botões de Navegação -->
-<a href="{% url 'mapas1' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 200px;">
+<a href="{% url 'mapas2' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 200px;">
     <span class="icon">
         <i class="fa-solid fa-chevron-left" style="margin-right: 8px;"></i>
     </span>
@@ -110,97 +33,74 @@
     </span>
 </a>
 
+
 <script>
-    // Inicializa o mapa com o token de acesso do Mapbox
-    mapboxgl.accessToken = 'pk.eyJ1IjoiaXNhYWNmcml0c2NoMiIsImEiOiJjbTF3bjh5MXUwcHBhMmpvbnQxYzFyOGJhIn0.ZHG6sujbL8tqshwhteDVLQ';
-
-    let currentPage = 1; // Página inicial
-    const perPage = 200; // Máximo de resultados por página
-    let totalFetched = 0; // Contagem de resultados obtidos
-    const maxResults = 2000; // Limitar a 2000 resultados
-    let totalPages = 1; // Inicialmente definida, será atualizada após a primeira chamada da API
-    let markers = []; // Array para armazenar os marcadores
-
-    // Função para limpar os marcadores no mapa
-    function clearMarkers() {
-        markers.forEach(marker => marker.remove());
-        markers = [];
-        totalFetched = 0; // Reinicia a contagem de resultados processados
-        currentPage = 1; // Reinicia a paginação
-    }
-
-    // Função genérica para buscar dados da API
-    function fetchData(page, taxonId) {
-        fetch(`https://api.inaturalist.org/v1/observations?taxon_id=${taxonId}&has=photos&nelat=1.73374&nelng=-35.75157&swlat=-21.76120&swlng=-57.28477&per_page=${perPage}&page=${page}`)
-            .then(response => response.json())
-            .then(data => {
-
-                // Atualiza o total de páginas com base no número total de resultados
-                if (page === 1) {
-                    totalPages = Math.ceil(data.total_results / perPage);
-                }
-
-                data.results.forEach(observation => {
-                    if (totalFetched >= maxResults) return;
-
-                    if (observation.geojson && observation.geojson.coordinates && observation.photos.length > 0) {
-                        const lng = observation.geojson.coordinates[0];
-                        const lat = observation.geojson.coordinates[1];
-
-                        const photoUrl = observation.photos[0].url; // URL da foto
-                        const species = observation.species_guess || 'Espécie desconhecida'; // Nome da espécie
-
-                        // Adiciona um marcador no mapa
-                        const marker = new mapboxgl.Marker()
-                            .setLngLat([lng, lat])
-                            .addTo(map);
-
-                        // Cria o conteúdo do popup com as informações da planta e imagem
-                        const popupContent = `
-                            <h3>${species}</h3>
-                            <p>Observado em: ${new Date(observation.time_observed_at).toLocaleDateString()}</p>
-                            <img src="${photoUrl}" alt="Imagem" style="width:100%;"/>
-                        `;
-
-                        // Adiciona um popup ao marcador
-                        const popup = new mapboxgl.Popup({ offset: 25 })
-                            .setHTML(popupContent);
-
-                        marker.setPopup(popup);
-
-                        markers.push(marker); // Armazena o marcador para poder removê-lo depois
-                        totalFetched++;
-                    }
-                });
-
-                // Verifica se há mais páginas e se ainda não atingimos o limite de resultados
-                if (page < totalPages && totalFetched < maxResults) {
-                    currentPage++;
-                    fetchData(currentPage, taxonId);
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao buscar dados da API:', error);
-            });
-    }
-
     // Inicializa o mapa
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaXNhYWNmcml0c2NoMiIsImEiOiJjbTF3bjh5MXUwcHBhMmpvbnQxYzFyOGJhIn0.ZHG6sujbL8tqshwhteDVLQ';
+    const audioCache = new Map();  // Mapa para armazenar áudios já carregados
+
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-46, -14], // Centro ajustado para o Brasil
-        zoom: 5
+        center: [-47.9292, -15.7801],
+        zoom: 4
     });
-
-    // Função para atualizar o mapa com novos dados
-    function updateMap(taxonId) {
-        clearMarkers(); // Limpa os marcadores existentes
-        fetchData(currentPage, taxonId); // Busca novos dados com o taxon_id correto
-    }
-
-    // Chamada inicial para plantas (taxon_id 47126)
-    fetchData(currentPage, 47126);
-</script>
+    
+    // Busca os dados da API do Xeno-canto via proxy
+    fetch('/proxy/xeno-canto/')
+        .then(response => response.json())
+        .then(data => {
+            data.recordings.forEach(recording => {
+                const marker = new mapboxgl.Marker()
+                    .setLngLat([recording.lng, recording.lat])
+                    .addTo(map);
+    
+                marker.getElement().addEventListener('click', () => {
+                    let somUrl = `/proxy/som/${recording.id}/`;
+    
+                    // Verifica se o áudio já está no cache
+                    if (audioCache.has(recording.id)) {
+                        const cachedUrl = audioCache.get(recording.id);
+                        const popup = new mapboxgl.Popup({ offset: 25 })
+                            .setHTML(`
+                                <h3>${recording.en}</h3>
+                                <p>${recording.gen} ${recording.sp}</p>
+                                <audio controls>
+                                    <source src="${cachedUrl}" type="audio/mpeg">
+                                    Seu navegador não suporta o player de áudio.
+                                </audio>
+                            `);
+                        marker.setPopup(popup).togglePopup();
+                    } else {
+                        // Faz a requisição para o áudio e armazena no cache
+                        fetch(somUrl, { method: 'HEAD' })
+                            .then(soundResponse => {
+                                if (soundResponse.ok) {
+                                    audioCache.set(recording.id, somUrl);  // Armazena no cache
+                                    const popup = new mapboxgl.Popup({ offset: 25 })
+                                        .setHTML(`
+                                            <h3>${recording.en}</h3>
+                                            <p>${recording.gen} ${recording.sp}</p>
+                                            <audio controls>
+                                                <source src="${somUrl}" type="audio/mpeg">
+                                                Seu navegador não suporta o player de áudio.
+                                            </audio>
+                                        `);
+                                    marker.setPopup(popup).togglePopup();
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erro ao verificar o som: ', error);
+                            });
+                    }
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados da API do Xeno-canto:', error);
+        });
+    </script>
+    
 {% endblock %}
 
 
