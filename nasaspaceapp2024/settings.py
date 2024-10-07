@@ -21,8 +21,7 @@ if IS_HEROKU_APP:
     SECURE_HSTS_PRELOAD = True
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    DATABASE_URL = config('DATABASE_URL')    
+    CSRF_COOKIE_SECURE = True        
 else:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
     
