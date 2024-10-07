@@ -1,22 +1,5 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div id='map' style='width: 100%; height: 500px;'></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <a href="{% url 'mapas1' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 200px;">
     <span class="icon">
@@ -30,74 +13,5 @@
         <i class="fa-solid fa-chevron-right" style="margin-left: 8px;"></i>
     </span>
 </a>
-<script>
-    // Inicializa o mapa
-    mapboxgl.accessToken = 'pk.eyJ1IjoiaXNhYWNmcml0c2NoMiIsImEiOiJjbTF3bjh5MXUwcHBhMmpvbnQxYzFyOGJhIn0.ZHG6sujbL8tqshwhteDVLQ';
-    const audioCache = new Map();  // Mapa para armazenar áudios já carregados
-
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-47.9292, -15.7801],
-        zoom: 4
-    });
-    
-    // Busca os dados da API do Xeno-canto via proxy
-    fetch('/proxy/xeno-canto/')
-        .then(response => response.json())
-        .then(data => {
-            data.recordings.forEach(recording => {
-                const marker = new mapboxgl.Marker()
-                    .setLngLat([recording.lng, recording.lat])
-                    .addTo(map);
-    
-                marker.getElement().addEventListener('click', () => {
-                    let somUrl = `/proxy/som/${recording.id}/`;
-    
-                    // Verifica se o áudio já está no cache
-                    if (audioCache.has(recording.id)) {
-                        const cachedUrl = audioCache.get(recording.id);
-                        const popup = new mapboxgl.Popup({ offset: 25 })
-                            .setHTML(`
-                                <h3>${recording.en}</h3>
-                                <p>${recording.gen} ${recording.sp}</p>
-                                <audio controls>
-                                    <source src="${cachedUrl}" type="audio/mpeg">
-                                    Seu navegador não suporta o player de áudio.
-                                </audio>
-                            `);
-                        marker.setPopup(popup).togglePopup();
-                    } else {
-                        // Faz a requisição para o áudio e armazena no cache
-                        fetch(somUrl, { method: 'HEAD' })
-                            .then(soundResponse => {
-                                if (soundResponse.ok) {
-                                    audioCache.set(recording.id, somUrl);  // Armazena no cache
-                                    const popup = new mapboxgl.Popup({ offset: 25 })
-                                        .setHTML(`
-                                            <h3>${recording.en}</h3>
-                                            <p>${recording.gen} ${recording.sp}</p>
-                                            <audio controls>
-                                                <source src="${somUrl}" type="audio/mpeg">
-                                                Seu navegador não suporta o player de áudio.
-                                            </audio>
-                                        `);
-                                    marker.setPopup(popup).togglePopup();
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Erro ao verificar o som: ', error);
-                            });
-                    }
-                });
-            });
-        })
-        .catch(error => {
-            console.error('Erro ao buscar dados da API do Xeno-canto:', error);
-        });
-    </script>
-    
-
-
 
 {% endblock %}

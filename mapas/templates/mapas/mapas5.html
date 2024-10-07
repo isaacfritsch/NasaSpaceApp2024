@@ -1,12 +1,37 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-
-<div style="width: 800px; height: 600px; overflow: hidden; position: relative; margin: auto;">
-    <iframe
-        src="https://worldview.earthdata.nasa.gov/?v=-99.2281205725655,-35.180558170338,-4.0508422771247865,7.413771021849483&l=Reference_Labels_15m,Reference_Features_15m,Coastlines_15m,MODIS_Combined_Thermal_Anomalies_All,Land_Water_Map&lg=true&l1=Reference_Labels_15m,Reference_Features_15m,Coastlines_15m,MODIS_Combined_Thermal_Anomalies_All,Land_Water_Map&lg1=true&ca=true&cv=49&t=2002-10-05-T00%3A00%3A00Z&t1=2024-10-05-T17%3A34%3A35Z"
-        frameborder="0"
-        style="width: 1200px; height: 1000px; position: absolute; top: -160px; left: -150px;"
-    ></iframe>
+<div class="section"> <!-- Usar section para maior flexibilidade -->
+    <!-- Mapa e Botões Alinhados -->
+    <div class="columns" style="height: 500px;">
+      <!-- Mapa (8 colunas com offset de 4 para alinhar à direita) -->
+      <div class="box column is-4"  style="margin-top:0px;">
+        <p style="font-family: 'Lora', serif; font-size: 1.5rem;
+        color: #2e2e2e;">
+        we have an intrinsic connection with the land and its biodiversity. Our relationship with the Earth is not only economic, but also existential, cultural, and spiritual. This connection defines my community—not just my people, but also our land and all the life it sustains. Unfortunately, the expansion of monoculture, such as soy farming, along with wildfires, pollution, and illegal mining, is causing the slow death of our entire community. On the map beside us, you can see the hotspots of fires across Brazil in September 2024, a month that witnessed the highest number of fire outbreaks in decades.
+    
+    </p>
+      </div>
+        <div style="position: absolute; bottom: 60px; left: 120px;">
+        <img src="{% static 'imagens/indigena3final.png' %}" alt="Imagem de exemplo" style="width: 200px; height: auto;">
+    </div>
+      <div class="column is-8">
+        <img src="{% static 'imagens/nasafogo.png' %}" alt="Imagem">
+          
+    </div>
 </div>
+    <a href="{% url 'mapas4' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 200px;">
+        <span class="icon">
+            <i class="fa-solid fa-chevron-left" style="margin-right: 8px;"></i>
+        </span>
+        PREVIOUS 
+    </a>
+    <a href="{% url 'mapas6' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 60px;">
+        NEXT
+        <span class="icon">
+            <i class="fa-solid fa-chevron-right" style="margin-left: 8px;"></i>
+        </span>
+    </a> 
+
+  
 {% endblock %}

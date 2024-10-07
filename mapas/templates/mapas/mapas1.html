@@ -1,19 +1,37 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-    <h1>This is the new page</h1>
+<div class="section"> <!-- Usar section para maior flexibilidade -->
+    <!-- Mapa e Botões Alinhados -->
+    <div class="columns" style="height: 460px;">
+      <!-- Mapa (8 colunas com offset de 4 para alinhar à direita) -->
+      <div class="box column is-4"  style="margin-top:50px;">
+        <p style="font-family: 'Lora', serif; font-size: 1.5rem;
+        color: #2e2e2e;">
+        Hello, my name is Wapté, and I am from the Xavante tribe. Today, I invite you to join me on a journey exploring the rich biodiversity and its deep connection to my culture. On the map beside us, you can see the Indigenous lands of Brazil marked in green, home to 266 distinct tribes, each with their own unique traditions and ways of living in harmony with nature. Together, we will uncover the vital role that biodiversity plays in sustaining our people and preserving our cultural heritage.
+    </p>
+      </div>
+        <div style="position: absolute; bottom: 60px; left: 120px;">
+        <img src="{% static 'imagens/indigena3final.png' %}" alt="Imagem de exemplo" style="width: 200px; height: auto;">
+    </div>
+      <div class="column is-8">
+        <img src="{% static 'imagens/territoriobrasileiro.png' %}" alt="Imagem">       
+    </div>
+</div>
     <a href="{% url 'home' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 200px;">
         <span class="icon">
             <i class="fa-solid fa-chevron-left" style="margin-right: 8px;"></i>
         </span>
         PREVIOUS 
     </a>
-    <a href="{% url 'mapas2' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 60px;">
+    <a href="{% url 'mapas3' %}" class="button is-large is-success" style="position: fixed; bottom: 60px; right: 60px;">
         NEXT
         <span class="icon">
             <i class="fa-solid fa-chevron-right" style="margin-left: 8px;"></i>
         </span>
-    </a>
+    </a> 
+
+  
 {% endblock %}
 
 

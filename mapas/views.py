@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.http import HttpResponse
 import requests
 from django.http import StreamingHttpResponse, JsonResponse
 
-def home(request): 
+def home(request):
     return render(request, 'mapas/home.html')
 def mapas1(request): 
     return render(request, 'mapas/mapas1.html')
@@ -16,6 +15,10 @@ def mapas4(request):
     return render(request, 'mapas/mapas4.html')
 def mapas5(request): 
     return render(request, 'mapas/mapas5.html')
+def mapas6(request): 
+    return render(request, 'mapas/mapas6.html')
+def mapas7(request): 
+    return render(request, 'mapas/mapas7.html')
 
 def proxy_xeno_canto(request):
     # URL da API do Xeno-canto
