@@ -136,9 +136,9 @@ WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 
 # STATICFILES_STORAGE = '.storage.WhiteNoiseStaticFilesStorage'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR /'media'
-WHITENOISE_MEDIA_ROOT =  MEDIA_ROOT
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
