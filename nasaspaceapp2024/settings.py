@@ -25,17 +25,6 @@ if IS_HEROKU_APP:
 else:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
     
-if IS_HEROKU_APP:
-    CACHES = {
-    'default': {
-        'BACKEND': 'django_bmemcached.memcached.BMemcached',
-        'LOCATION': os.environ.get('MEMCACHEDCLOUD_SERVERS').split(','),
-        'OPTIONS': {
-                    'username': os.environ.get('MEMCACHEDCLOUD_USERNAME'),
-                    'password': os.environ.get('MEMCACHEDCLOUD_PASSWORD')
-            }
-    }
-}
 
 # Application definition
 
@@ -86,12 +75,7 @@ WSGI_APPLICATION = 'nasaspaceapp2024.wsgi.application'
 import psycopg2
 
 
-if IS_HEROKU_APP:    
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-    DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-    }
-else:    
+if IS_HEROKU_APP:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
